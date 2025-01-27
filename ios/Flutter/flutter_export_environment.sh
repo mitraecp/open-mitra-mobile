@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=/opt/homebrew/Caskroom/flutter/3.13.4/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/vitornunesdealmeida/Projetos/open-mitra-mobile/meu_projeto"
+export "FLUTTER_APPLICATION_PATH=/Users/vitornunesdealmeida/Projetos/open-mitra-mobile"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
