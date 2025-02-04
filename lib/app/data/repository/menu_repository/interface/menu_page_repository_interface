@@ -1,0 +1,5 @@
+import 'package:open_mitra_mobile/app/data/model/user_models/logged_user_model.dart';
+abstract class IMenuPageRepository {
+  Future<bool> sendReportError(
+      {required LoggedUser loggedUser, required String message});
+}
