@@ -1,8 +1,9 @@
-String appName = 'Mitra ECP';
-String appLocalAppImageIconPath = 'assets/images/app_icon.png';
+String appName = 'Mitra Open';
+String appLocalAppImageIconPath = 'assets/icon/icone-teste.jpg';
 String appDomain = 'mitraecp.com';
 int appWorkspaceId = 0;
 int appProjectId = 0;
 String appProjectLogoUrl = '';
+String appProjectLocalLogoPath = 'assets/icon/icone-teste.jpg';
 String appProjectName = '';
 String appProjectPrimaryColor = '';

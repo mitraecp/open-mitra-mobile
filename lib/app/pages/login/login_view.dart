@@ -18,26 +18,6 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MitraAppBar(
-        appTitle: Text(
-          'back'.tr,
-          style: AppTheme.text_lg(AppThemeTextStyleType.semibold),
-        ),
-        appLeading: Padding(
-          padding: const EdgeInsets.only(left: SpacingScale.scaleOneAndHalf),
-          child: IconButton(
-            onPressed: () {
-              Get.back();
-              controller.workspaceController.loggedAppPublishRef.value = 0;
-            },
-            icon: const Icon(
-              Icons.keyboard_arrow_left_rounded,
-              size: 30,
-            ),
-          ),
-        ),
-        isToAddOnTopContainer: controller.isToShowAppBarOnTopContainer,
-      ),
       body: LayoutBuilder(
         builder: (context, constraints) => Container(
           padding: EdgeInsets.symmetric(vertical: constraints.maxHeight * .04),
@@ -63,12 +43,19 @@ class LoginView extends GetView<LoginController> {
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: appProjectLogoUrl == ''
-                                ? Image.network(
-                                    emptyLogoUrl,
-                                    height: 80,
-                                    width: 80,
-                                    fit: BoxFit.cover,
-                                  )
+                                ? appProjectLocalLogoPath == ''
+                                    ? Image.network(
+                                        emptyLogoUrl,
+                                        height: 80,
+                                        width: 80,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.asset(
+                                        appProjectLocalLogoPath,
+                                        height: 80,
+                                        width: 80,
+                                        fit: BoxFit.cover,
+                                      )
                                 : Image.network(
                                     appProjectLogoUrl,
                                     height: 80,

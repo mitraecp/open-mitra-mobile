@@ -11,9 +11,9 @@ class MainSettings {
   static init() async {
     //NOTE: Inicializa o firebase.
     //Login com firebase.
-    await Firebase.initializeApp(
-      // options: DefaultFirebaseOptions.currentPlatform,
-    );
+    // await Firebase.initializeApp(
+    //   // options: DefaultFirebaseOptions.currentPlatform,
+    // );
 
     // Note: Verifica se o usuario esta usando IOS.
     if (Platform.isIOS) {
