@@ -30,5 +30,5 @@ Caso precise conceder permissão de execução ao script (necessário em macOS/L
 ```dart
 chmod +x scripts/update_app_config.dart
 ```
-### 2️⃣ Login com o google
+### 4️⃣ Login com o google
 
