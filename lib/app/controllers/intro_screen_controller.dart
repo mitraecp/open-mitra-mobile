@@ -73,25 +73,10 @@ class IntroScreenController extends GetxController {
         return BaseUrlMitraModel.fromMap(baseUrlJson as Map<String, dynamic>);
       }).toList();
 
-      setFrontAiGlobalLink(value);
-
       setFront1Dot0GlobalLink(value);
 
       globalBaseUrlLinks.value = listOfBaseUrl;
     });
-  }
-
-  setFrontAiGlobalLink(Map<String, dynamic> value) {
-    // Crie a lista de objetos de link do front 2.0 da AI
-    // Obtenha a lista de URLs base do mapa
-    List<dynamic> listOfAiFrontUrlJson =
-        value['listAiFrontLink'] as List<dynamic>;
-    List<BaseUrlMitraModel> listOfAiFrontUrl =
-        listOfAiFrontUrlJson.map((baseUrlJson) {
-      return BaseUrlMitraModel.fromMap(baseUrlJson as Map<String, dynamic>);
-    }).toList();
-
-    globalAiFrontUrlLinks.value = listOfAiFrontUrl;
   }
 
   setFront1Dot0GlobalLink(Map<String, dynamic> value) {

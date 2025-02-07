@@ -76,7 +76,7 @@ class MenuAboutAppView extends StatelessWidget {
                   text: globalSuporteEmail,
                   style:
                       AppTheme.text_sm(AppThemeTextStyleType.regular).copyWith(
-                    color: GlobalColors.violet_600,
+                    color: GlobalColors.appPrimary_600,
                   ),
                 ),
               ],

@@ -99,7 +99,7 @@ class EmailLoginView extends GetView<LoginController> {
               child: Text(
                 'forgot_password'.tr,
                 style: AppTheme.text_sm(AppThemeTextStyleType.medium).copyWith(
-                  color: GlobalColors.violet_600,
+                  color: GlobalColors.appPrimary_600,
                 ),
               ),
             ),

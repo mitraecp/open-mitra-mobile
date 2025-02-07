@@ -297,11 +297,11 @@ class ProjectWithMobileScreens extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(bottom: SpacingScale.scaleTwo),
         child: MitraCardWidget(
-            cardIcon: const Icon(
+            cardIcon: Icon(
               Icons.smartphone,
-              color: GlobalColors.violet_600,
+              color: GlobalColors.appPrimary_600,
             ),
-            cardIconColor: GlobalColors.violet_50,
+            cardIconColor: GlobalColors.appPrimary_50,
             cardTitle: currentScreen.name,
             cardTitleStyle: AppTheme.text_md(AppThemeTextStyleType.medium)),
       ),

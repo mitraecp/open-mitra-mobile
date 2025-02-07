@@ -143,14 +143,14 @@ Future<DateTime?> showMitraDatePicker({
                     yearSelected.value =
                         DateFormat('y').format(selectedDate.value);
                   },
-                  pickerTheme: const DateTimePickerTheme(
+                  pickerTheme:  DateTimePickerTheme(
                     backgroundColor: Colors.transparent,
-                    itemTextStyle: TextStyle(
+                    itemTextStyle: const TextStyle(
                       color: GlobalColors.grey_900,
                       fontSize: 18,
                       fontFamily: 'Inter',
                     ),
-                    dividerColor: GlobalColors.violet_600,
+                    dividerColor: GlobalColors.appPrimary_600,
                   ),
                 ),
               ),

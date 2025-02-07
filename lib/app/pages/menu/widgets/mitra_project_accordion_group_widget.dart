@@ -75,9 +75,9 @@ class MitraProjectAccordionGroupWidget extends StatelessWidget {
         child: Row(
           children: [
             currentProject.accordionListSelected?.value ?? false
-                ? const Icon(
+                ? Icon(
                     Icons.arrow_drop_down_rounded,
-                    color: GlobalColors.violet_500,
+                    color: GlobalColors.appPrimary_500,
                   )
                 : const Icon(
                     Icons.arrow_right_rounded,
@@ -90,7 +90,8 @@ class MitraProjectAccordionGroupWidget extends StatelessWidget {
               padding: EdgeInsets.all(SpacingScale.custom(3)),
               decoration: BoxDecoration(
                 color:
-                    HexColor(currentProject.projectConfig?.color ?? '#7839EE').withOpacity(0.3),
+                    HexColor(currentProject.projectConfig?.color ?? '#7839EE')
+                        .withOpacity(0.3),
                 borderRadius: const BorderRadius.all(Radius.circular(4.5)),
               ),
               child: MitraCardIconWidget(
@@ -118,9 +119,9 @@ class MitraProjectAccordionGroupWidget extends StatelessWidget {
                       controller.homeController
                           .goToProjectWithProjectId(currentProject.id, false);
                     },
-                    child: const Icon(
+                    child: Icon(
                       Icons.arrow_forward_outlined,
-                      color: GlobalColors.violet_500,
+                      color: GlobalColors.appPrimary_500,
                       size: 24,
                     ),
                   )
@@ -202,9 +203,9 @@ class MitraProjectAccordionGroupWidget extends StatelessWidget {
         children: [
           currentProjectScreenFolder.accordionProjectFolderSelected?.value ??
                   false
-              ? const Icon(
+              ? Icon(
                   Icons.arrow_drop_down_rounded,
-                  color: GlobalColors.violet_500,
+                  color: GlobalColors.appPrimary_500,
                 )
               : const Icon(
                   Icons.arrow_right_rounded,

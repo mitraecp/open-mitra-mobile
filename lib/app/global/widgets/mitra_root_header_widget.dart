@@ -40,9 +40,9 @@ class MitraRootHeaderWidget extends StatelessWidget {
                     () => Container(
                       height: 40,
                       width: 40,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: GlobalColors.violet_200),
+                          color: GlobalColors.appPrimary_200),
                       child: _getCardIconWidget(
                           controller
                               .workspaceController.selectWorkspace.value.name,
@@ -72,8 +72,7 @@ class MitraRootHeaderWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                      controller.projectController.selectedProject.value
-                                  .name !=
+                      controller.projectController.selectedProject.value.name !=
                               ''
                           ? SizedBox(
                               child: Obx(
@@ -141,7 +140,7 @@ class MitraRootHeaderWidget extends StatelessWidget {
           )
         : ClipOval(
             child: Container(
-              color: GlobalColors.violet_600,
+              color: GlobalColors.appPrimary_600,
               width: 40,
               height: 40,
               child: const Icon(

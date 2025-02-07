@@ -40,7 +40,7 @@ class BodySentReportError extends StatelessWidget {
                       TextSpan(
                         text: globalSuporteEmail,
                         style: AppTheme.text_sm(AppThemeTextStyleType.regular)
-                            .copyWith(color: GlobalColors.violet_600),
+                            .copyWith(color: GlobalColors.appPrimary_600),
                       )
                     ],
                   ),

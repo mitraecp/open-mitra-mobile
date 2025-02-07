@@ -126,10 +126,10 @@ Widget _builDataPickerButton({
             border: Border.all(color: GlobalColors.grey_300)),
         child: Row(
           children: [
-            const Icon(
+            Icon(
               Icons.date_range,
               size: 16,
-              color: GlobalColors.violet_600,
+              color: GlobalColors.appPrimary_600,
             ),
             const SizedBox(width: SpacingScale.scaleOne),
             Text(

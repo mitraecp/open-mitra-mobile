@@ -3,6 +3,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:open_mitra_mobile/app/data/model/workspace_models/workspace_model.dart';
 import 'package:open_mitra_mobile/app/global/constants.dart';
 import 'package:open_mitra_mobile/app/global/get_storage_types.dart';
+import 'package:open_mitra_mobile/settings/project_config.dart';
 
 class WorkspaceProvider extends GetConnect {
   Future getWorkspaceById(int workspaceId) async {
@@ -12,7 +13,8 @@ class WorkspaceProvider extends GetConnect {
     final headers = {
       "Accept": "application/json",
       "Cache-Control": "no-cache",
-      "Authorization": userToken
+      "Authorization": userToken,
+      "Origin": 'https://$appDomain'
     };
     var response = await get(
       // "${baseUrl}mitraspace/userSpaces/$workspaceId",
@@ -33,7 +35,8 @@ class WorkspaceProvider extends GetConnect {
     final headers = {
       "Accept": "application/json",
       "Cache-Control": "no-cache",
-      "Authorization": userToken
+      "Authorization": userToken,
+      "Origin": 'https://$appDomain'
     };
     var response = await get(
       "${baseUrl}mitraspace/userSpaces/$workspaceId",
@@ -53,7 +56,8 @@ class WorkspaceProvider extends GetConnect {
     final headers = {
       "Accept": "application/json",
       "Cache-Control": "no-cache",
-      "Authorization": userToken
+      "Authorization": userToken,
+      "Origin": 'https://$appDomain'
     };
     var response = await get(
       // "${baseUrl}mitraspace/userSpaces",

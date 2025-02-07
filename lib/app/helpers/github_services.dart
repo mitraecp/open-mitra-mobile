@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class GithubService extends GetConnect {
   static const String mobileBaseReference =
-      'https://raw.githubusercontent.com/mitraecp/frontend-resoucers/master/mobile_mitra_apps_api_base_reference.json';
+      'https://raw.githubusercontent.com/mitraecp/frontend-resoucers/master/mobile_open_mitra_apps_api_base.json';
 
   Future<Map<String, dynamic>> getIsToUseQAUrl() async {
     try {

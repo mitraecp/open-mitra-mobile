@@ -270,7 +270,7 @@ class ProfilePage extends GetView<ProfileController> {
           )
         : ClipOval(
             child: Container(
-              color: GlobalColors.violet_600,
+              color: GlobalColors.appPrimary_600,
               width: 40,
               height: 40,
               child: const Icon(

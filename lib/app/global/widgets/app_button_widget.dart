@@ -87,7 +87,7 @@ class AppButtonWidget extends StatelessWidget {
       height: buttonHeight,
       // width: MediaQuery.of(context).size.width * 0.35,
       decoration: BoxDecoration(
-        color: buttonColor,
+        color: buttonColor == GlobalColors.violet_600 ? GlobalColors.appPrimary_600 : buttonColor,
         borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
         boxShadow: const [
           GlobalColors.shadow_xs,
@@ -114,7 +114,7 @@ class AppButtonWidget extends StatelessWidget {
       height: buttonHeight,
       // width: MediaQuery.of(context).size.width * 0.35,
       decoration: BoxDecoration(
-        color: GlobalColors.violet_200,
+        color: GlobalColors.appPrimary_200,
         borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
       ),
       child: TextButton(

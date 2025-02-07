@@ -38,11 +38,11 @@ class _MitraCheckboxWidgetState extends State<MitraCheckboxWidget> {
       width: 24,
       height: 24,
       decoration: BoxDecoration(
-        color: widget.isChecked ? GlobalColors.violet_25 : Colors.white,
+        color: widget.isChecked ? GlobalColors.appPrimary_25 : Colors.white,
         shape: BoxShape.circle,
         border: Border.all(
           color: widget.isChecked
-              ? GlobalColors.violet_600
+              ? GlobalColors.appPrimary_600
               : GlobalColors.grey_300,
         ),
       ),
@@ -51,9 +51,9 @@ class _MitraCheckboxWidgetState extends State<MitraCheckboxWidget> {
               child: Container(
                 width: 10,
                 height: 10,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: GlobalColors.violet_600,
+                  color: GlobalColors.appPrimary_600,
                 ),
               ),
             )
@@ -66,20 +66,20 @@ class _MitraCheckboxWidgetState extends State<MitraCheckboxWidget> {
       width: 24,
       height: 24,
       decoration: BoxDecoration(
-        color: widget.isChecked ? GlobalColors.violet_25 : Colors.white,
+        color: widget.isChecked ? GlobalColors.appPrimary_25 : Colors.white,
         shape: BoxShape.rectangle,
         borderRadius: const BorderRadius.all(Radius.circular(8)),
         border: Border.all(
           color: widget.isChecked
-              ? GlobalColors.violet_600
+              ? GlobalColors.appPrimary_600
               : GlobalColors.grey_300,
         ),
       ),
       child: widget.isChecked
-          ? const Center(
+          ? Center(
               child: Icon(
                 Icons.check_rounded,
-                color: GlobalColors.violet_600,
+                color: GlobalColors.appPrimary_600,
                 size: 20,
               ),
             )

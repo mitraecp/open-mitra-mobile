@@ -17,7 +17,9 @@ class MitraLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircularProgressIndicator(
-      color: circleColor,
+      color: circleColor == GlobalColors.violet_800
+          ? GlobalColors.appPrimary_800
+          : circleColor,
       strokeAlign: circleStrokeAlign,
       strokeWidth: circleStrokeWidth,
     );

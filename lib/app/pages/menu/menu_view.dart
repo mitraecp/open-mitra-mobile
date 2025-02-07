@@ -45,8 +45,8 @@ class MenuPage extends GetView<MenuPageController> {
               () => Container(
                 height: 40,
                 width: 40,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle, color: GlobalColors.violet_200),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: GlobalColors.appPrimary_200),
                 child: _getCardIconWidget(
                     controller.workspaceController.selectWorkspace.value.name,
                     '#5720B7'),
@@ -226,9 +226,9 @@ class MenuPage extends GetView<MenuPageController> {
                             Obx(
                               () => controller.homeController
                                       .showProjectsInMenuPage.value
-                                  ? const Icon(
+                                  ? Icon(
                                       Icons.keyboard_arrow_down_outlined,
-                                      color: GlobalColors.violet_500,
+                                      color: GlobalColors.appPrimary_600,
                                     )
                                   : const Icon(
                                       Icons.keyboard_arrow_right_outlined,

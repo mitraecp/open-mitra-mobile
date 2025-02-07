@@ -119,8 +119,8 @@ class _MitraInputTextFieldState extends State<MitraInputTextField> {
                   focusedBorder: widget.inputError
                       ? _errorOutlineInputBorder()
                       : OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: GlobalColors.violet_600,
+                          borderSide: BorderSide(
+                            color: GlobalColors.appPrimary_600,
                           ),
                           borderRadius: BorderRadius.all(
                             Radius.circular(widget.inputBorderRadius),
@@ -158,7 +158,9 @@ class _MitraInputTextFieldState extends State<MitraInputTextField> {
     return isFocused
         ? widget.inputError
             ? GlobalColors.error_100
-            : widget.inputFocusShadowColor
+            : widget.inputFocusShadowColor == GlobalColors.violet_100
+                ? GlobalColors.appPrimary_100
+                : widget.inputFocusShadowColor
         : widget.inputShadowColorDefault;
   }
 }

@@ -1,8 +1,52 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:open_mitra_mobile/settings/project_config.dart';
 
 class GlobalColors {
+  // AppColor
+  static Color appPrimaryBase = _fromHex(appProjectPrimaryColor);
+
+  static final Map<int, Color> appPrimaryShades =
+      _generateShades(appPrimaryBase);
+  static Color get appPrimary_25 => appPrimaryShades[25]!;
+  static Color get appPrimary_50 => appPrimaryShades[50]!;
+  static Color get appPrimary_100 => appPrimaryShades[100]!;
+  static Color get appPrimary_200 => appPrimaryShades[200]!;
+  static Color get appPrimary_300 => appPrimaryShades[300]!;
+  static Color get appPrimary_400 => appPrimaryShades[400]!;
+  static Color get appPrimary_500 => appPrimaryShades[500]!;
+  static Color get appPrimary_600 => appPrimaryShades[600]!;
+  static Color get appPrimary_700 => appPrimaryShades[700]!;
+  static Color get appPrimary_800 => appPrimaryShades[800]!;
+  static Color get appPrimary_900 => appPrimaryShades[900]!;
+
+  // Método para converter HEX em Color
+  static Color _fromHex(String hex) {
+    hex = hex.replaceAll("#", "");
+    if (hex.length == 6) {
+      hex = "FF$hex"; // Adiciona opacidade 100% se não existir
+    }
+    return Color(int.parse(hex, radix: 16));
+  }
+
+  // Método para gerar variações da cor principal
+  static Map<int, Color> _generateShades(Color baseColor) {
+    return {
+      25: baseColor.withOpacity(0.025),
+      50: baseColor.withOpacity(0.05),
+      100: baseColor.withOpacity(0.1),
+      200: baseColor.withOpacity(0.2),
+      300: baseColor.withOpacity(0.3),
+      400: baseColor.withOpacity(0.4),
+      500: baseColor.withOpacity(0.5),
+      600: baseColor.withOpacity(0.6),
+      700: baseColor.withOpacity(0.7),
+      800: baseColor.withOpacity(0.8),
+      900: baseColor.withOpacity(0.9),
+    };
+  }
+
   // Azul
   static const Color primary_25 = Color(0xFFF5FAFF);
   static const Color primary_50 = Color(0xFFEFF8FF);
@@ -113,7 +157,7 @@ class GlobalColors {
       return _parseColor(primaryColor);
     } catch (e) {
       // Se houver um erro ao tentar parsear, retorna a cor padrão
-      return GlobalColors.violet_600;
+      return GlobalColors.appPrimary_600;
     }
   }
 

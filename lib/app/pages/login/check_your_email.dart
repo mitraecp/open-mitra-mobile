@@ -191,7 +191,7 @@ class CheckYourEmailPage extends GetView<LoginController> {
         TextSpan(
           text: 'resend'.tr,
           style: AppTheme.text_sm(AppThemeTextStyleType.medium)
-              .copyWith(color: GlobalColors.violet_600),
+              .copyWith(color: GlobalColors.appPrimary_600),
         ),
       ],
     );

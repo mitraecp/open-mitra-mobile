@@ -242,8 +242,10 @@ Widget _buildMenuListOfWorkspaceBottomSheet({
                       cardBorderColor: cardBorderColor,
                       cardIcon: currentItem.itemIcon,
                       cardHeight: cardHeight,
-                      cardIconColor:
-                          currentItem.itemIconBgColor ?? cardIconBackground,
+                      cardIconColor: currentItem.itemIconBgColor ??
+                          (cardIconBackground == GlobalColors.violet_600
+                              ? GlobalColors.appPrimary_600
+                              : cardIconBackground),
                       cardIconShape: BoxShape.circle,
                       cardIconBackgroundSize: cardIconBackgroundSize,
                       cardTitle: currentItem.itemName,
@@ -277,8 +279,10 @@ Widget _buildMenuListOfWorkspaceBottomSheet({
                     cardBorderColor: cardBorderColor,
                     cardHeight: cardHeight,
                     cardIcon: currentItem.itemIcon,
-                    cardIconColor:
-                        currentItem.itemIconBgColor ?? cardIconBackground,
+                    cardIconColor: currentItem.itemIconBgColor ??
+                        (cardIconBackground == GlobalColors.violet_600
+                            ? GlobalColors.appPrimary_600
+                            : cardIconBackground),
                     cardIconShape: BoxShape.circle,
                     cardIconBackgroundSize: cardIconBackgroundSize,
                     cardTitle: currentItem.itemName,

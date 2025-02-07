@@ -26,12 +26,12 @@ class LoginFormWidget extends GetView<LoginController> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _buildLoginButton(),
-        const SizedBox(height: SpacingScale.scaleThree),
-        GoogleLoginButton(),
-        const SizedBox(height: SpacingScale.scaleThree),
-        const MicrosoftLoginButton(),
-        const SizedBox(height: SpacingScale.scaleThree),
-        const AppleLoginButton()
+        // const SizedBox(height: SpacingScale.scaleThree),
+        // GoogleLoginButton(),
+        // const SizedBox(height: SpacingScale.scaleThree),
+        // const MicrosoftLoginButton(),
+        // const SizedBox(height: SpacingScale.scaleThree),
+        // const AppleLoginButton()
       ],
     );
   }

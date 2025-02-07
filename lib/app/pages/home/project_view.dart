@@ -138,7 +138,7 @@ class ProjectPage extends StatelessWidget {
                   width: 18,
                 ),
                 cardBoxShadow: GlobalColors.shadow_violet,
-                cardBorderColor: GlobalColors.violet_200,
+                cardBorderColor: GlobalColors.appPrimary_200,
                 cardIconBackgroundSize: 2,
                 cardIconColor: Colors.white,
                 cardTitle: 'Lila'.tr,
@@ -154,22 +154,22 @@ class ProjectPage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        color: GlobalColors.violet_100,
+        color: GlobalColors.appPrimary_100,
       ),
       padding: const EdgeInsets.symmetric(
           vertical: SpacingScale.scaleHalf, horizontal: SpacingScale.scaleOne),
       child: Row(
         children: [
-          const Icon(
+          Icon(
             Icons.auto_awesome,
-            color: GlobalColors.violet_500,
+            color: GlobalColors.appPrimary_500,
             size: 16,
           ),
           const SizedBox(width: SpacingScale.scaleHalf),
           Text(
             'talk_with_your_data'.tr,
             style: AppTheme.text_xs(AppThemeTextStyleType.medium)
-                .copyWith(color: GlobalColors.violet_600),
+                .copyWith(color: GlobalColors.appPrimary_600),
           )
         ],
       ),

@@ -85,7 +85,7 @@ class MenuReportErrorView extends GetView<MenuPageController> {
                       ? AppTheme.text_sm(AppThemeTextStyleType.regular)
                           .copyWith(color: GlobalColors.grey_400)
                       : AppTheme.text_sm(AppThemeTextStyleType.semibold)
-                          .copyWith(color: GlobalColors.violet_600)),
+                          .copyWith(color: GlobalColors.appPrimary_600)),
             ),
           ),
         ),

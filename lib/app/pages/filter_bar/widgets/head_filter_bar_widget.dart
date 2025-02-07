@@ -5,14 +5,12 @@ import 'package:open_mitra_mobile/app/theme/app_theme.dart';
 import 'package:open_mitra_mobile/app/theme/colors.dart';
 import 'package:open_mitra_mobile/app/theme/dimensions.dart';
 
-
 Widget filterHead(BuildContext context, FilterBarController controller) {
   return Obx(
     () => Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: SpacingScale.scaleTwoAndHalf,
-        vertical: SpacingScale.scaleTwo
-      ),
+          horizontal: SpacingScale.scaleTwoAndHalf,
+          vertical: SpacingScale.scaleTwo),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -21,9 +19,9 @@ Widget filterHead(BuildContext context, FilterBarController controller) {
               controller.verifyHaveValueSelected();
               Get.back();
             },
-            child: const Icon(
+            child: Icon(
               Icons.keyboard_arrow_down,
-              color: GlobalColors.violet_600,
+              color: GlobalColors.appPrimary_600,
               size: 24,
             ),
           ),
@@ -60,7 +58,7 @@ Widget _buildCleanWidget(BuildContext context, FilterBarController controller) {
     child: Text(
       'clean'.tr,
       style: AppTheme.text_xs(AppThemeTextStyleType.regular)
-          .copyWith(color: GlobalColors.violet_600),
+          .copyWith(color: GlobalColors.appPrimary_600),
     ),
   );
 }
