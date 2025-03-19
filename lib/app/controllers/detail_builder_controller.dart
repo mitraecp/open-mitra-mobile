@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:open_mitra_mobile/app/data/model/detail_builder_models/detail_builder_button_model.dart';
 import 'package:open_mitra_mobile/app/data/model/detail_builder_models/detail_builder_model.dart';
+import 'package:open_mitra_mobile/app/data/model/detail_builder_models/detail_flap_model.dart';
 import 'package:open_mitra_mobile/app/data/model/projects_models/refresh_token_model.dart';
 import 'package:open_mitra_mobile/app/data/repository/detail_repository/interface/detail_builder_repository_interface.dart';
 import 'package:open_mitra_mobile/app/global/widgets/widgets_models/mitra_bottom_sheet_item_model.dart';
@@ -28,6 +29,15 @@ class DetailBuilderController extends GetxController {
       selectedTimelineItem: [],
     ),
   );
+
+  Rx<DetailFlapModel> currentDetailFlap = Rx(DetailFlapModel(
+    name: '',
+    id: -1,
+    canDeleteInfo: false,
+  ));
+
+  // Essa info vem do web, se for true pode deletar portanto o disabled precisa ser falso, e se canDelete for false quer dizer que o disabled precisa ser true.
+  get currentFlapDisabledDelete => !currentDetailFlap.value.canDeleteInfo;
 
   getDetailButtonList(RefreshTokenModel mergeRefreshToken) async {
     selectedDetailButtons.value = [];
@@ -61,13 +71,20 @@ class DetailBuilderController extends GetxController {
 
     MitraBottomSheetItemModel tempItemDelete = MitraBottomSheetItemModel(
       isSelected: false,
-      itemIcon: const Icon(
-        Icons.delete_outline,
-        size: 20,
-        color: GlobalColors.error_600,
-      ),
+      itemIcon: currentFlapDisabledDelete
+          ? const Icon(
+              Icons.delete_outline,
+              size: 20,
+              color: GlobalColors.error_300,
+            )
+          : const Icon(
+              Icons.delete_outline,
+              size: 20,
+              color: GlobalColors.error_600,
+            ),
       itemName: 'delete'.tr,
       itemId: 1,
+      disabled: currentFlapDisabledDelete,
     );
 
     tempDetailButtonList.add(tempItemEdit);

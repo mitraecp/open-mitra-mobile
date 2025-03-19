@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:open_mitra_mobile/app/controllers/mobile_screen_controller.dart';
 import 'package:open_mitra_mobile/app/data/model/detail_builder_models/detail_builder_model.dart';
+import 'package:open_mitra_mobile/app/data/model/detail_builder_models/detail_flap_model.dart';
 import 'package:open_mitra_mobile/app/data/model/iframe_models.dart/iframe_payload_model.dart';
 import 'package:open_mitra_mobile/app/global/widgets/mitra_bottom_sheet_widget.dart';
 import 'package:open_mitra_mobile/app/global/widgets/mitra_date_picker.dart';
@@ -35,6 +36,9 @@ class JavaFront1Dot0Listeners {
 
     // Adapta o mobile pra quando tem um detail aberto
     _iframeDetailBuilderOpen(webViewController);
+
+    // Salva dados da aba atual do detail
+    _iframeDetailSaveCurrentFlap(webViewController);
 
     // Atualiza o nome do detail quando pega de um outro local.
     _setIframeDetailBuilderName(webViewController);
@@ -167,6 +171,35 @@ _iframeDetailBuilderOpen(
           mobileController.detailBuilderController.getDetailButtonList(
             mobileController.projectController.mergeRefreshToken.value,
           );
+          controlTimerDetail = false;
+        });
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  });
+}
+
+_iframeDetailSaveCurrentFlap(WebViewController webViewController) {
+  bool controlTimerDetail = false;
+  webViewController.addJavaScriptChannel('saveMobileCurrentDetailFlap',
+      onMessageReceived: (JavaScriptMessage message) {
+    final MobileScreenController mobileController =
+        Get.find<MobileScreenController>();
+    try {
+      if (controlTimerDetail == false) {
+        controlTimerDetail = true;
+        Timer(const Duration(milliseconds: 500), () {
+          Map<String, dynamic> selectedDetail = jsonDecode(message.message);
+          DetailFlapModel tempDetailFlapModel = DetailFlapModel(
+            name: selectedDetail['flapName'],
+            id: selectedDetail['id'],
+            canDeleteInfo: selectedDetail['canDeleteInfo'],
+          );
+
+          mobileController.detailBuilderController.currentDetailFlap.value =
+              tempDetailFlapModel;
+
           controlTimerDetail = false;
         });
       }

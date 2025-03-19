@@ -27,6 +27,7 @@ class MitraCardWidget extends StatelessWidget {
   final BoxBorder? cardBorderConfig;
   final BorderRadiusGeometry? cardBorderRadius;
   final EdgeInsetsGeometry? cardPaddingWidget;
+  final bool cardDisabled;
 
   const MitraCardWidget({
     Key? key,
@@ -52,6 +53,7 @@ class MitraCardWidget extends StatelessWidget {
     this.cardBorderConfig,
     this.cardBorderRadius,
     this.cardPaddingWidget,
+    this.cardDisabled = false,
   }) : super(key: key);
 
   @override
@@ -61,7 +63,9 @@ class MitraCardWidget extends StatelessWidget {
       height: cardHeight,
       decoration: BoxDecoration(
         color: cardBackground,
-        border: cardBorderConfig ?? Border.all(color: cardBorderColor),
+        border: cardDisabled
+            ? Border.all(color: GlobalColors.grey_50)
+            : Border.all(color: cardBorderColor),
         borderRadius:
             cardBorderRadius ?? const BorderRadius.all(Radius.circular(8)),
         boxShadow: [cardBoxShadow],
@@ -73,7 +77,7 @@ class MitraCardWidget extends StatelessWidget {
   Widget _verticalCard() {
     return IntrinsicWidth(
       child: InkWell(
-        onTap: onChanged,
+        onTap: cardDisabled ? () {} : onChanged,
         child: Row(
           children: [
             cardIcon == null && cardIconColor == null
@@ -115,7 +119,7 @@ class MitraCardWidget extends StatelessWidget {
                 ],
               ),
             ),
-           const SizedBox(width: SpacingScale.scaleOneAndHalf),
+            const SizedBox(width: SpacingScale.scaleOneAndHalf),
             sufixWidget != null ? sufixWidget! : const SizedBox(),
             isWithCheckbox
                 ? MitraCheckboxWidget(

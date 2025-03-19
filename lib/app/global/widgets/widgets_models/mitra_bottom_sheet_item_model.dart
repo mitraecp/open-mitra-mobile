@@ -6,6 +6,7 @@ class MitraBottomSheetItemModel {
   bool isSelected;
   Color? itemIconBgColor;
   int? itemId;
+  bool? disabled;
 
   MitraBottomSheetItemModel({
     required this.itemIcon,
@@ -13,11 +14,12 @@ class MitraBottomSheetItemModel {
     required this.isSelected,
     this.itemIconBgColor,
     this.itemId,
+    this.disabled = false,
   });
 
   @override
   String toString() =>
-      'MitraBottomSheetItemModel(itemIcon: $itemIcon, itemName: $itemName, isSelected: $isSelected, itemId: $itemId)';
+      'MitraBottomSheetItemModel(itemIcon: $itemIcon, itemName: $itemName, isSelected: $isSelected, itemId: $itemId, disabled: $disabled)';
 
   @override
   bool operator ==(covariant MitraBottomSheetItemModel other) {
@@ -26,7 +28,8 @@ class MitraBottomSheetItemModel {
     return other.itemIcon == itemIcon &&
         other.itemName == itemName &&
         other.isSelected == isSelected &&
-        other.itemId == itemId;
+        other.itemId == itemId &&
+        other.disabled == disabled;
   }
 
   @override
@@ -34,5 +37,6 @@ class MitraBottomSheetItemModel {
       itemIcon.hashCode ^
       itemName.hashCode ^
       isSelected.hashCode ^
-      itemId.hashCode;
+      itemId.hashCode ^
+      disabled.hashCode;
 }

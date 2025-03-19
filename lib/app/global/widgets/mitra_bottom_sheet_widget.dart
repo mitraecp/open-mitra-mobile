@@ -234,12 +234,15 @@ Widget _buildMenuListOfWorkspaceBottomSheet({
                       vertical: SpacingScale.scaleOne),
                   child: InkWell(
                     onTap: () {
-                      onChanged(currentItem.itemId!);
+                      currentItem.disabled ?? false
+                          ? null
+                          : onChanged(currentItem.itemId!);
                     },
                     child: MitraCardWidget(
                       cardPadding: cardPadding,
                       cardBackground: cardBackground,
                       cardBorderColor: cardBorderColor,
+                      cardDisabled: currentItem.disabled ?? false,
                       cardIcon: currentItem.itemIcon,
                       cardHeight: cardHeight,
                       cardIconColor: currentItem.itemIconBgColor ??
@@ -249,8 +252,12 @@ Widget _buildMenuListOfWorkspaceBottomSheet({
                       cardIconShape: BoxShape.circle,
                       cardIconBackgroundSize: cardIconBackgroundSize,
                       cardTitle: currentItem.itemName,
-                      cardTitleStyle:
-                          AppTheme.text_sm(AppThemeTextStyleType.medium)
+                      cardTitleStyle: currentItem.disabled ?? false
+                          ? AppTheme.text_sm(AppThemeTextStyleType.medium)
+                              .copyWith(
+                                  overflow: TextOverflow.ellipsis,
+                                  color: GlobalColors.grey_300)
+                          : AppTheme.text_sm(AppThemeTextStyleType.medium)
                               .copyWith(overflow: TextOverflow.ellipsis),
                       isWithCheckbox: bottomSheetIsToShowCheckBox,
                       isCheckboxSeleceted: currentItem.isSelected,
@@ -271,12 +278,13 @@ Widget _buildMenuListOfWorkspaceBottomSheet({
                     const EdgeInsets.symmetric(vertical: SpacingScale.scaleOne),
                 child: InkWell(
                   onTap: () {
-                    onChanged(index);
+                    currentItem.disabled ?? false ? null : onChanged(index);
                   },
                   child: MitraCardWidget(
                     cardPadding: cardPadding,
                     cardBackground: cardBackground,
                     cardBorderColor: cardBorderColor,
+                    cardDisabled: currentItem.disabled ?? false,
                     cardHeight: cardHeight,
                     cardIcon: currentItem.itemIcon,
                     cardIconColor: currentItem.itemIconBgColor ??
@@ -286,8 +294,12 @@ Widget _buildMenuListOfWorkspaceBottomSheet({
                     cardIconShape: BoxShape.circle,
                     cardIconBackgroundSize: cardIconBackgroundSize,
                     cardTitle: currentItem.itemName,
-                    cardTitleStyle:
-                        AppTheme.text_sm(AppThemeTextStyleType.medium)
+                    cardTitleStyle: currentItem.disabled ?? false
+                        ? AppTheme.text_sm(AppThemeTextStyleType.medium)
+                            .copyWith(
+                                overflow: TextOverflow.ellipsis,
+                                color: GlobalColors.grey_300)
+                        : AppTheme.text_sm(AppThemeTextStyleType.medium)
                             .copyWith(overflow: TextOverflow.ellipsis),
                     isWithCheckbox: bottomSheetIsToShowCheckBox,
                     isCheckboxSeleceted: currentItem.isSelected,
