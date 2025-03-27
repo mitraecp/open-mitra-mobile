@@ -33,12 +33,15 @@ class _MobileScreenViewState extends State<MobileScreenView>
   void initState() {
     super.initState();
     controller.initController();
+    controller.webViewStore.isIframeActive.value = true;
     WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    controller.webViewStore.isIframeActive.value = false;
+    controller.webViewStore.webViewController.clearCache();
     super.dispose();
   }
 
@@ -133,13 +136,19 @@ class _MobileScreenViewState extends State<MobileScreenView>
                                     -1
                             ? const Text('')
                             : Text(
-                                controller.detailBuilderController
-                                            .selectedDetailBuilder.value.id !=
-                                        -1
-                                    ? controller.detailBuilderController
-                                        .selectedDetailBuilder.value.name
+                                controller.iframeHasLeaveMitraSite.value
+                                    ? controller.webViewStore
+                                        .iframeLeaveMitraSiteName.value
                                     : controller
-                                        .selectedMobileScreen.value.name,
+                                                .detailBuilderController
+                                                .selectedDetailBuilder
+                                                .value
+                                                .id !=
+                                            -1
+                                        ? controller.detailBuilderController
+                                            .selectedDetailBuilder.value.name
+                                        : controller
+                                            .selectedMobileScreen.value.name,
                                 style: AppTheme.text_lg(
                                     AppThemeTextStyleType.semibold),
                               ),
@@ -149,7 +158,9 @@ class _MobileScreenViewState extends State<MobileScreenView>
                         left: SpacingScale.scaleOneAndHalf),
                     child: IconButton(
                       onPressed: () {
-                        if (controller.detailBuilderController
+                        if (controller.iframeHasLeaveMitraSite.value) {
+                          controller.webViewStore.webViewController.goBack();
+                        } else if (controller.detailBuilderController
                                 .selectedDetailBuilder.value.id !=
                             -1) {
                           controller.closeCurrentDetail();

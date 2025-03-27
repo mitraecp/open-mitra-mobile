@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:open_mitra_mobile/app/controllers/mobile_screen_controller.dart';
+import 'package:open_mitra_mobile/app/controllers/webview_store_controller.dart';
 import 'package:open_mitra_mobile/app/data/model/detail_builder_models/detail_builder_model.dart';
 import 'package:open_mitra_mobile/app/data/model/detail_builder_models/detail_flap_model.dart';
 import 'package:open_mitra_mobile/app/data/model/iframe_models.dart/iframe_payload_model.dart';
@@ -18,6 +19,8 @@ import 'package:open_mitra_mobile/app/theme/app_theme.dart';
 import 'package:open_mitra_mobile/app/theme/colors.dart';
 import 'package:open_mitra_mobile/app/theme/dimensions.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+final WebViewStore webViewStore = Get.find<WebViewStore>();
 
 class JavaFront1Dot0Listeners {
   setupListenerChannels(WebViewController webViewController) {
@@ -65,6 +68,7 @@ class JavaFront1Dot0Listeners {
 _printMessage(WebViewController webViewController) {
   webViewController.addJavaScriptChannel('Print',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     // ignore: avoid_print
     print(message.message);
   });
@@ -75,6 +79,7 @@ _iframeModalOpen(
 ) {
   webViewController.addJavaScriptChannel('iframeModalOpen',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     final MobileScreenController mobileController =
         Get.find<MobileScreenController>();
     try {
@@ -94,6 +99,7 @@ _callModalDatePicker(WebViewController webViewController) {
 
   webViewController.addJavaScriptChannel('callMobileDatePicker',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     try {
       if (controlTimerDataPicker == false) {
         controlTimerDataPicker = true;
@@ -154,6 +160,7 @@ _iframeDetailBuilderOpen(
   bool controlTimerDetail = false;
   webViewController.addJavaScriptChannel('detailBuilder',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     final MobileScreenController mobileController =
         Get.find<MobileScreenController>();
     try {
@@ -184,6 +191,7 @@ _iframeDetailSaveCurrentFlap(WebViewController webViewController) {
   bool controlTimerDetail = false;
   webViewController.addJavaScriptChannel('saveMobileCurrentDetailFlap',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     final MobileScreenController mobileController =
         Get.find<MobileScreenController>();
     try {
@@ -213,6 +221,7 @@ _setIframeDetailBuilderName(WebViewController webViewController) {
   bool controlTimerDetailName = false;
   webViewController.addJavaScriptChannel('detailBuilderName',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     final MobileScreenController mobileController =
         Get.find<MobileScreenController>();
     try {
@@ -240,6 +249,7 @@ _selectedDetailTimelineMenuItem(WebViewController webViewController) {
 
   webViewController.addJavaScriptChannel('selectedItemTimelineMenu',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     final MobileScreenController mobileController =
         Get.find<MobileScreenController>();
     try {
@@ -281,6 +291,7 @@ _selectedDetailTimelineMenuItem(WebViewController webViewController) {
 _frontCurrentPRVersion(WebViewController webViewController) {
   webViewController.addJavaScriptChannel('iframeCallBackFrontVersion',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     try {
       final MobileScreenController mobileController =
           Get.find<MobileScreenController>();
@@ -297,13 +308,18 @@ _frontCurrentPRVersion(WebViewController webViewController) {
 _callMobileScreenNavigation(WebViewController webViewController) {
   webViewController.addJavaScriptChannel('callMobileScreenNavigation',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     final MobileScreenController mobileController =
         Get.find<MobileScreenController>();
     try {
       Map<String, dynamic> data = jsonDecode(message.message);
 
       mobileController.updateRouteAndSelectedMobileScreen(
-          data['screenId'], data['name'], data['isToUpdateIframeRouteHistory']);
+        data['screenId'],
+        data['name'],
+        data['isToUpdateIframeRouteHistory'],
+        data['carrySelection'],
+      );
     } catch (e) {
       throw Exception(e);
     }
@@ -313,6 +329,7 @@ _callMobileScreenNavigation(WebViewController webViewController) {
 _callMobileToLogoutUser(WebViewController webViewController) {
   webViewController.addJavaScriptChannel('callMobileToLogoutUser',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     final MobileScreenController mobileController =
         Get.find<MobileScreenController>();
     try {
@@ -326,6 +343,7 @@ _callMobileToLogoutUser(WebViewController webViewController) {
 _callMobileIframeIsLoading(WebViewController webViewController) {
   webViewController.addJavaScriptChannel('callMobileIframeIsLoading',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     final MobileScreenController mobileController =
         Get.find<MobileScreenController>();
     try {
@@ -340,6 +358,7 @@ _callMobileIframeIsLoading(WebViewController webViewController) {
 _callMobileVerifyToCloseHeader(WebViewController webViewController) {
   webViewController.addJavaScriptChannel('callMobileVerifyToCloseHeader',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     final MobileScreenController mobileController =
         Get.find<MobileScreenController>();
     try {
@@ -358,6 +377,7 @@ _frontValidateIframeResponsive(
   // bool controlTimerDataPicker = false;
   webViewController.addJavaScriptChannel('frontValidateIframeResponsive',
       onMessageReceived: (JavaScriptMessage message) {
+    if (!webViewStore.isIframeActive.value) return;
     final MobileScreenController mobileController =
         Get.find<MobileScreenController>();
     try {
@@ -371,6 +391,7 @@ _frontValidateIframeResponsive(
 _callOpenPhotoLibraryIOS(WebViewController webViewController) {
   webViewController.addJavaScriptChannel('callOpenPhotoLibraryIOS',
       onMessageReceived: (JavaScriptMessage message) async {
+    if (!webViewStore.isIframeActive.value) return;
     try {
       // Usando a file_picker para escolher uma imagem
       FilePickerResult? result = await FilePicker.platform.pickFiles(

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:open_mitra_mobile/app/global/constants.dart';
 import 'package:open_mitra_mobile/app/helpers/javascrpit_channel_manager/javascript_listeners.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 // Import for Android features.
@@ -27,6 +28,10 @@ class WebViewStore extends GetxController {
 
   RxString currentUrl = ''.obs;
   RxBool isToShowWebView = false.obs, webViewLoading = false.obs;
+
+  RxString iframeLeaveMitraSiteName = ''.obs;
+
+  RxBool isIframeActive = false.obs;
 
   reloadWebView(String url) {
     webViewController.loadRequest(Uri.parse(url));
@@ -75,6 +80,9 @@ class WebViewStore extends GetxController {
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
+          onNavigationRequest: (NavigationRequest request) {
+            return iframeNavigationRequestRules(request);
+          },
           onProgress: (int progress) {},
           onPageStarted: (String url) {
             webViewLoading.value = true;
@@ -135,6 +143,35 @@ class WebViewStore extends GetxController {
     } else {
       // ignore: avoid_print
       print('Os canais de comunicação já foram configurados.');
+    }
+  }
+
+  NavigationDecision iframeNavigationRequestRules(NavigationRequest request) {
+    if (request.url.startsWith('https://www.youtube.com/watch') ||
+        request.url.startsWith('https://m.youtube.com/watch')) {
+      // caso youtube
+      iframeLeaveMitraSiteName.value = 'YouTube';
+      return NavigationDecision.navigate;
+    } else if (request.url.startsWith('https://wa.me') ||
+        request.url.startsWith('whatsapp://')) {
+      iframeLeaveMitraSiteName.value = '';
+      // Caso whatsapp
+      _launchURL(request.url);
+      return NavigationDecision.prevent;
+    } else {
+      if (request.url != ('about:blank')) {
+        iframeLeaveMitraSiteName.value = '';
+      }
+      return NavigationDecision.navigate;
+    }
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else {
+      // ignore: avoid_print
+      print("Erro ao abrir $url");
     }
   }
 }

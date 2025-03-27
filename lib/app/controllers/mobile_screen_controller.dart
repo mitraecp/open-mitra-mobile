@@ -87,6 +87,20 @@ class MobileScreenController extends GetxController {
     ),
   );
 
+  RxBool iframeHasLeaveMitraSite = false.obs;
+
+  @override
+  void onInit() {
+    ever(webViewStore.iframeLeaveMitraSiteName, (String newSiteEntry) async {
+      if (newSiteEntry != '') {
+        iframeHasLeaveMitraSite.value = true;
+      } else if (newSiteEntry == '') {
+        iframeHasLeaveMitraSite.value = false;
+      }
+    });
+    super.onInit();
+  }
+
   initController() async {
     historyOfSelectedScreen.value = [];
     disposeSelectedMobileScreen();
@@ -152,7 +166,11 @@ class MobileScreenController extends GetxController {
   }
 
   updateRouteAndSelectedMobileScreen(
-      int screenId, String screenName, bool isToAddHistory) async {
+    int screenId,
+    String screenName,
+    bool isToAddHistory,
+    bool carrySelection,
+  ) async {
     loadingHeader.value = true;
     if (screenId == mobileHomeRouteScreenId.value) {
       await updateSelectedMobileScreen(screenId, screenName);
@@ -182,7 +200,9 @@ class MobileScreenController extends GetxController {
       historyRouteMobileOnHome.value = false;
       setisToShowHeaderMobileHeaderBar();
     }
-
+    if (isToAddHistory) {
+      updateSelectedScreenData(carrySelection);
+    }
     loadingHeader.value = false;
   }
 
@@ -228,21 +248,31 @@ class MobileScreenController extends GetxController {
     try {
       await projectController
           .getRefreshToken(projectController.selectedProject.value.id);
+      updateSelectedScreenData(false);
+    } catch (e) {
+      Timer(const Duration(milliseconds: 1000), () {
+        Get.back();
+        AppSnackBar().defaultBar('', 'server_under_maintenance'.tr);
+      });
+    }
+  }
+
+  updateSelectedScreenData(bool carrySelection) async {
+    try {
       selectedScreen.value = await projectController.projectRepository
           .getSelectedScreenData(projectController.mergeRefreshToken.value,
               selectedMobileScreen.value.id);
 
       selectedMobileScreen.value.name = selectedScreen.value.name ?? '';
 
-      await projectController.projectRepository
-          .deleteTempFilterBarSelections(selectedMobileScreen.value.id);
+      if (!carrySelection) {
+        await projectController.projectRepository
+            .deleteTempFilterBarSelections(selectedMobileScreen.value.id);
+      }
 
       getScreenFilterBarSelections();
     } catch (e) {
-      Timer(const Duration(milliseconds: 1000), () {
-        Get.back();
-        AppSnackBar().defaultBar('', 'server_under_maintenance'.tr);
-      });
+      throw Exception(e);
     }
   }
 
@@ -327,14 +357,16 @@ class MobileScreenController extends GetxController {
 
       MitraBottomSheetItemModel tempItem = MitraBottomSheetItemModel(
         isSelected: false,
-        itemIcon: Text(
-          '${currentItem.icon}_baseline',
-          style: const TextStyle(
-            fontFamily: 'MaterialIcons',
-            fontSize: 20,
-            color: Colors.black,
-          ),
-        ),
+        itemIcon: currentItem.icon != ''
+            ? Text(
+                '${currentItem.icon}_baseline',
+                style: const TextStyle(
+                  fontFamily: 'MaterialIcons',
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+              )
+            : const SizedBox(),
         itemName: currentItem.title,
         itemId: currentItem.id,
       );
@@ -394,7 +426,7 @@ class MobileScreenController extends GetxController {
           .firstWhere((element) => element.id == mobileHomeRouteScreenId.value)
           .name;
       updateRouteAndSelectedMobileScreen(
-          mobileHomeRouteScreenId.value, homeName, false);
+          mobileHomeRouteScreenId.value, homeName, false, false);
       callActionOpenScreen(mobileHomeRouteScreenId.value);
     } else {
       homeController.goToNavigationHome();
